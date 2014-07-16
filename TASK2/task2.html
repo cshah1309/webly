@@ -1,0 +1,117 @@
+<html>
+
+<head>
+
+    <link href="css/foundation.css" rel="stylesheet" type="text/css" />
+    
+    <script type="text/javascript">
+            function MyFunction() 
+            {
+                var string = document.form1.one.value;
+                var string1 = document.form1.two.value;
+                var string2 = document.form1.three.value;
+                var string3 = document.form1.four.value;
+                var string4 = document.form1.five.value;
+
+                var str=string.toLowerCase();
+                var str1=string1.toLowerCase();
+                var str2=string2.toLowerCase();    
+                var str3=string3.toLowerCase();
+                var str4=string4.toLowerCase();
+
+                var strall = str.trim() + " " + str1.trim() + " " + str2.trim() + " " + str3.trim() + " " + str4.trim();
+                alert(strall);
+                var rword = [];
+                var rcount = [];
+                var unique = [];
+                arr3 = strall.split(" ");
+                for (i = 0; i < arr3.length; i++) 
+                {
+                    var count = 0;
+                    for (j = i + 1; j < arr3.length; j++)
+                    {
+                        if (arr3[i] == arr3[j])
+                        {
+                            count++;
+                            arr3.splice(j, 1);
+                        }
+                    }
+                    if (count > 0) 
+                    {
+                        rword.push(arr3[i]);
+                        rcount.push(count + 1);
+                    }
+                    else
+                    {
+                        unique.push(arr3[i]);
+                    }
+                }
+                for(i = 0; i < rcount.length - 1; i++)
+                {
+                    for(j = 0; j < rcount.length - i; j++)
+                    {
+                        if(rcount[j] < rcount[j+1])
+                        {
+                            var temp = rcount[j];
+                            rcount[j] = rcount[j+1];
+                            rcount[j+1] = temp;
+                            
+                            temp = rword[j];
+                            rword[j] = rword[j+1];
+                            rword[j+1] = temp;
+                        }
+                    }
+                }
+                alert('hello world');
+                var total = unique.length + rword.length;
+
+                document.write("<p>Total number of unique words is : " + total + "</p>");
+                document.write("<table>");
+                document.write("<tr>");
+                document.write("<td>Words</td>");
+                document.write("<td>Frequency</td>");
+                document.write("</tr>");
+
+                for (i = 0; i < rword.length; i++) {
+
+                    document.write("<tr>");
+                    document.write("<td>" + rword[i] + "</td>");
+                    document.write("<td>" + rcount[i] + "</td>");
+                    document.write("</tr>");
+                }
+
+                for (i = 0; i < unique.length; i++) {
+                    document.write("<tr>");
+                    document.write("<td>" + unique[i] + "</td>");
+                    document.write("<td> 1 </td>");
+                    document.write("</tr>");
+                }
+                document.write("</table>");
+            }
+        </script>
+
+</head>
+
+<body>
+
+    <form name="form1" method="get">
+        <div class="row">
+            <div class="large-10 columns">
+        
+                <h1>Task 2</h1>
+            
+                    <input type="text" placeholder="Enter String 1" id="one">
+                    <input type="text" placeholder="Enter String 2" id="two">
+                    <input type="text" placeholder="Enter String 3" id="three">
+                    <input type="text" placeholder="Enter String 4" id="four">
+                    <input type="text" placeholder="Enter String 5" id="five">
+                    
+                    <input type="submit" name="submit" onclick="MyFunction()" >
+        
+            </div>
+        </div>    
+    </form>
+   
+</body>
+
+</html>

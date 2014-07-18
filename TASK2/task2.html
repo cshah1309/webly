@@ -5,13 +5,21 @@
     <link href="css/foundation.css" rel="stylesheet" type="text/css" />
     
     <script type="text/javascript">
+
             function MyFunction() 
+            
             {
-                var string = document.form1.one.value;
-                var string1 = document.form1.two.value;
-                var string2 = document.form1.three.value;
-                var string3 = document.form1.four.value;
-                var string4 = document.form1.five.value;
+                var input = document.form1.one.value;
+                var input1 = document.form1.two.value;
+                var input2 = document.form1.three.value;
+                var input3 = document.form1.four.value;
+                var input4 = document.form1.five.value;
+
+                var string= input.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g,"");
+                var string1 = input1.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g,"");
+                var string2 = input2.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g,"");
+                var string3 = input3.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g,"");
+                var string4 = input4.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g,"");
 
                 var str=string.toLowerCase();
                 var str1=string1.toLowerCase();
@@ -20,49 +28,61 @@
                 var str4=string4.toLowerCase();
 
                 var strall = str.trim() + " " + str1.trim() + " " + str2.trim() + " " + str3.trim() + " " + str4.trim();
-                alert(strall);
+                //alert(strall);
                 var rword = [];
                 var rcount = [];
                 var unique = [];
                 arr3 = strall.split(" ");
-                for (i = 0; i < arr3.length; i++) 
-                {
-                    var count = 0;
-                    for (j = i + 1; j < arr3.length; j++)
+                //alert(arr3);
+                    for(k=0;k<arr3.length;k++)
                     {
-                        if (arr3[i] == arr3[j])
+                        
+                        if(arr3[k]=='')
                         {
-                            count++;
-                            arr3.splice(j, 1);
+                        alert("hello");
+                        arr3.splice(k,1);}
+                    }
+
+
+
+                    for (i = 0; i < arr3.length; i++) 
+                    {
+                        var count = 0;
+                        for (j = i + 1; j < arr3.length; j++)
+                        {
+                            if (arr3[i] == arr3[j])
+                            {
+                                count++;
+                                arr3.splice(j, 1);
+                            }
+                        }
+                        if (count > 0) 
+                        {
+                            rword.push(arr3[i]);
+                            rcount.push(count + 1);
+                        }
+                        else
+                        {
+                            unique.push(arr3[i]);
                         }
                     }
-                    if (count > 0) 
+                    for(i = 0; i < rcount.length - 1; i++)
                     {
-                        rword.push(arr3[i]);
-                        rcount.push(count + 1);
-                    }
-                    else
-                    {
-                        unique.push(arr3[i]);
-                    }
-                }
-                for(i = 0; i < rcount.length - 1; i++)
-                {
-                    for(j = 0; j < rcount.length - i; j++)
-                    {
-                        if(rcount[j] < rcount[j+1])
+                        for(j = 0; j < rcount.length - i; j++)
                         {
-                            var temp = rcount[j];
-                            rcount[j] = rcount[j+1];
-                            rcount[j+1] = temp;
-                            
-                            temp = rword[j];
-                            rword[j] = rword[j+1];
-                            rword[j+1] = temp;
+                            if(rcount[j] < rcount[j+1])
+                            {
+                                var temp = rcount[j];
+                                rcount[j] = rcount[j+1];
+                                rcount[j+1] = temp;
+                                
+                                temp = rword[j];
+                                rword[j] = rword[j+1];
+                                rword[j+1] = temp;
+                            }
                         }
                     }
-                }
-                alert('hello world');
+                //alert('hello world');
                 var total = unique.length + rword.length;
 
                 document.write("<p>Total number of unique words is : " + total + "</p>");

@@ -12,4 +12,4 @@ var ralph = new Dog('Ralph')
 
 ralph.bark()
 
-setTimeout( ralph.bark() , 1000 )//function bark wasnt called. using bark() makes it call the second time
+setTimeout(function(){ralph.bark()}, 1000 )//function bark wasnt called. using bark() makes it call the second time
